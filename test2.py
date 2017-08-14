@@ -69,10 +69,21 @@ def text_objects(text, font):
 def message_display(text):
     largeText = pygame.font.Font('freesansbold.ttf',115)
     TextSurf, TextRect = text_objects(text, largeText)
-    TextRect.center = ((displayw/2),(displayh/2))
     return TextSurf,TextRect
 
 def displaycrash(display):
         (tsurf,trect) = message_display('crashed!')
+        trect.center = ((displayw/2),(displayh/2))
         display.blit(tsurf,trect)
         pygame.display.update()
+
+def displayfps(display,clock):
+        (tsurf,trect) = message_display(clock.tick())
+        trect.center = ((displayw*3/4),(20))
+        display.blit(tsurf,trect)
+        pygame.display.update()
+        
+def displaydodged(display,count):
+    font = pygame.font.SysFont(None, 25)
+    text = font.render("Dodged: "+str(count), True, white)
+    display.blit(text,(1,1))

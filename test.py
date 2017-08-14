@@ -4,6 +4,8 @@ from test2 import *
 
 def gameloop():
 
+        score = 0
+
         car11 = test2.car1()
         car22 = test2.car2()
 
@@ -41,7 +43,8 @@ def gameloop():
                                         display.blit(car22.image,car22.loc)
                                 if event.key == pygame.K_UP:
                                         displaycrash(display)
-                # displayfps()
+                # displayfps(display,clock)
+                        displaydodged(display,score)
                 clock.tick(120)
                 pygame.display.update()
                 
