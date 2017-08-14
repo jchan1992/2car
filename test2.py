@@ -1,5 +1,7 @@
 import pygame
 import sys
+import time
+import random
 
 #set pos
 LEFT = 0
@@ -69,3 +71,8 @@ def message_display(text):
     TextSurf, TextRect = text_objects(text, largeText)
     TextRect.center = ((displayw/2),(displayh/2))
     return TextSurf,TextRect
+
+def displaycrash(display):
+        (tsurf,trect) = message_display('crashed!')
+        display.blit(tsurf,trect)
+        pygame.display.update()
