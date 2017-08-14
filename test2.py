@@ -59,3 +59,13 @@ class car2(pygame.sprite.Sprite):
                         self.y = displayh - 100
                         self.loc = (self.x,self.y)
                 print(self.x,'\t',self.y,'\t',self.rect)
+
+def text_objects(text, font):
+    textSurface = font.render(text, True, white)
+    return textSurface, textSurface.get_rect()
+
+def message_display(text):
+    largeText = pygame.font.Font('freesansbold.ttf',115)
+    TextSurf, TextRect = text_objects(text, largeText)
+    TextRect.center = ((displayw/2),(displayh/2))
+    return TextSurf,TextRect

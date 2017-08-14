@@ -1,6 +1,11 @@
 # import pygame
 import test2
-from test2 import *                
+from test2 import *   
+
+def displaycrash():
+        (tsurf,trect) = message_display('crashed!')
+        display.blit(tsurf,trect)
+
 car11 = test2.car1()
 car22 = test2.car2()
 
@@ -36,8 +41,10 @@ while not end_game:
                         if event.key == pygame.K_RIGHT:
                                 car22.update()
                                 display.blit(car22.image,car22.loc)
-                
-        clock.tick(1000)
+                        if event.key == pygame.K_UP:
+                                displaycrash()
+        # displayfps()
+        clock.tick(120)
         pygame.display.update()
         
 
