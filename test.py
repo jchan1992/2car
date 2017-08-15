@@ -4,8 +4,32 @@
 import test2
 from test2 import *   
 
-#main game loop
-def gameloop():
+#game intro
+def gameintro(screen,clock):
+        # intro = True
+        timer = 0
+        time1 = pygame.time.get_ticks()
+        screen.fill(white)
+        displayintro(screen)
+        while timer <= 5000:
+                time2 = pygame.time.get_ticks()
+                timer = time2-time1
+                for event in pygame.event.get():
+                        print(event)
+                        if event.type == pygame.QUIT:
+                                pygame.quit()
+                                quit()
+                        if event.type == pygame.KEYDOWN:
+                                if event.key == pygame.K_q:
+                                        pygame.quit()
+                                        quit()
+                                if event.key == pygame.K_s:
+                                        timer = 5001
+                print(time1,time2,timer)
+                # intro = False
+
+def gameloop(screen,clock):
+        end_game = False
         #set score counter
         score = 0
 
@@ -13,20 +37,9 @@ def gameloop():
         car11 = test2.car1()
         car22 = test2.car2()
 
-        #instantiate surface
-        pygame.init()
-        #instantiate clock
-        clock = pygame.time.Clock()
-        #set screen size
-        screen = pygame.display.set_mode((displayw,displayh))
-        pygame.display.set_caption("My first game")
-        pygame.mixer.music.load('initiald.mid')
-        pygame.mixer.music.play(-1)
-        end_game = False
-        
-
-        #loop
         while not end_game:
+
+                clock.tick(60)
 
                 #draw background
                 screen.fill(black)
@@ -54,15 +67,28 @@ def gameloop():
                                         displaycrash(screen)
 
                 displaydodged(screen,score)
-                clock.tick(60)
                 # print(clock.get_fps())
                 displayfps(screen,clock)
                 pygame.display.update()
-                
+
+#main game loop
+def mainloop():
+        #instantiate surface
+        pygame.init()
+        #instantiate clock
+        clock = pygame.time.Clock()
+        #set screen size
+        screen = pygame.display.set_mode((displayw,displayh))
+        pygame.display.set_caption("My first game")
+        pygame.mixer.music.load('initiald.mid')
+        pygame.mixer.music.play(-1)
+        
+        gameintro(screen,clock)
+        gameloop(screen,clock)
 
         pygame.mixer.music.stop()
         pygame.quit()
         sys.exit()
         quit()
 
-gameloop()
+mainloop()

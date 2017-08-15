@@ -62,17 +62,24 @@ class car2(pygame.sprite.Sprite):
                         self.loc = (self.x,self.y)
                 print(self.x,'\t',self.y,'\t',self.rect)
 
-def text_objects(text, font):
-    textSurface = font.render(text, True, white)
+def text_objects(text,font,colour):
+    textSurface = font.render(text, True, colour)
     return textSurface, textSurface.get_rect()
 
-def message_display(text):
-    largeText = pygame.font.Font('freesansbold.ttf',115)
-    TextSurf, TextRect = text_objects(text, largeText)
+def message_display(text,colour):
+    largeText = pygame.font.Font('freesansbold.ttf',80)
+    TextSurf, TextRect = text_objects(text, largeText,colour)
     return TextSurf,TextRect
 
+def displayintro(display):
+        (tsurf,trect) = message_display("My First Game", black)
+        trect.center = ((displayw/2),(displayh/2))
+        display.blit(tsurf,trect)
+        pygame.display.update()
+        # clock.tick(1)
+
 def displaycrash(display):
-        (tsurf,trect) = message_display('crashed!')
+        (tsurf,trect) = message_display('crashed!',white)
         trect.center = ((displayw/2),(displayh/2))
         display.blit(tsurf,trect)
         pygame.display.update()
@@ -80,11 +87,7 @@ def displaycrash(display):
 def displayfps(display,clock):
         font = pygame.font.SysFont(None, 25)
         text = font.render("fps: "+str(clock.get_fps()), True, white)
-        display.blit(text,(400,1))
-        # (tsurf,trect) = message_display(clock.get_fps())
-        # trect.center = ((displayw*3/4),(20))
-        # display.blit(tsurf,trect)
-        # pygame.display.update()
+        display.blit(text,(400,1))      
         
 def displaydodged(display,count):
     font = pygame.font.SysFont(None, 25)
