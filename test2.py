@@ -7,7 +7,7 @@ import random
 LEFT = 0
 RIGHT = 1
 
-#set values
+#set  display values
 displayw = 600
 displayh = 800
 
@@ -78,10 +78,13 @@ def displaycrash(display):
         pygame.display.update()
 
 def displayfps(display,clock):
-        (tsurf,trect) = message_display(clock.tick())
-        trect.center = ((displayw*3/4),(20))
-        display.blit(tsurf,trect)
-        pygame.display.update()
+        font = pygame.font.SysFont(None, 25)
+        text = font.render("fps: "+str(clock.get_fps()), True, white)
+        display.blit(text,(400,1))
+        # (tsurf,trect) = message_display(clock.get_fps())
+        # trect.center = ((displayw*3/4),(20))
+        # display.blit(tsurf,trect)
+        # pygame.display.update()
         
 def displaydodged(display,count):
     font = pygame.font.SysFont(None, 25)
