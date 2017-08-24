@@ -6,6 +6,7 @@ import random
 #set pos
 LEFT = 0
 RIGHT = 1
+NEITHER = 2
 
 #set  display values
 displayw = 600
@@ -62,6 +63,16 @@ class car2(pygame.sprite.Sprite):
                         self.loc = (self.x,self.y)
                 print(self.x,'\t',self.y,'\t',self.rect)
 
+class coin1(pygame.sprite.Sprite):
+        def __init__(self):
+                pygame.sprite.Sprite.__init__(self)
+                self.x = 0
+                self.y = 0
+                self.loc = (self.x,self.y)
+                self.image = pygame.image.load('coin1.jpg')
+                self.rect = self.image.get_rect()
+                # print(self.x,'\t',self.y,'\t',self.rect)
+
 def text_objects(text,font,colour):
     textSurface = font.render(text, True, colour)
     return textSurface, textSurface.get_rect()
@@ -93,3 +104,7 @@ def displaydodged(display,count):
     font = pygame.font.SysFont(None, 25)
     text = font.render("Dodged: "+str(count), True, white)
     display.blit(text,(1,1))
+
+def randomcoin(display,rand):
+        coin11 = coin1()
+        

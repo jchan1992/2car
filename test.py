@@ -82,9 +82,10 @@ def mainloop():
         pygame.display.set_caption("My first game")
         pygame.mixer.music.load('initiald.mid')
         pygame.mixer.music.play(-1)
-        
-        gameintro(screen,clock)
-        gameloop(screen,clock)
+
+        rand = random.seed()        
+        gameintro(screen,clock,rand)
+        gameloop(screen,clock,rand)
 
         pygame.mixer.music.stop()
         pygame.quit()
