@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 # load functions and classes from test2
-import gamefunc   
+import test2
+from test2 import *   
 
 f __name__ == '__main__':
     main()
