@@ -1,10 +1,10 @@
 #!/usr/bin/python
 
 # load functions and classes from test2
-import gamefunc   
+from gamefunc import *   
 
-f __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
 
 #game intro
 def gameintro(screen,clock):
@@ -85,13 +85,15 @@ def main():
         pygame.mixer.music.load('initiald.mid')
         pygame.mixer.music.play(-1)
 
-        rand = random.seed()        
-        gameintro(screen,clock,rand)
-        gameloop(screen,clock,rand)
+        # rand = random.seed()        
+        # gameintro(screen,clock,rand)
+        # gameloop(screen,clock,rand)
 
         pygame.mixer.music.stop()
         pygame.quit()
         sys.exit()
         quit()
 
-mainloop()
+while(1):
+        main()
+

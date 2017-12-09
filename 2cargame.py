@@ -1,13 +1,12 @@
 #!/usr/bin/python
 
-# load functions and classes from test2
-import test2
-from test2 import *   
+# load functions and classes from gamefunc
+from gamefunc import *   
 
-f __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
 
-#game intro
+#game intro screen
 def gameintro(screen,clock):
         # intro = True
         timer = 0
@@ -37,8 +36,8 @@ def gameloop(screen,clock):
         score = 0
 
         #instantiate car objects
-        car11 = test2.car1()
-        car22 = test2.car2()
+        car11 = car1()
+        car22 = car2()
 
         while not end_game:
 
@@ -75,7 +74,7 @@ def gameloop(screen,clock):
                 pygame.display.update()
 
 #main game loop
-def main():
+def mainloop():
         #instantiate surface
         pygame.init()
         #instantiate clock
@@ -87,8 +86,8 @@ def main():
         pygame.mixer.music.play(-1)
 
         rand = random.seed()        
-        gameintro(screen,clock,rand)
-        gameloop(screen,clock,rand)
+        gameintro(screen,clock)
+        gameloop(screen,clock)
 
         pygame.mixer.music.stop()
         pygame.quit()
