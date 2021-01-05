@@ -27,18 +27,28 @@ def message_display(text,colour):
     TextSurf, TextRect = text_objects(text, largeText,colour)
     return TextSurf,TextRect
 
-def displayintro(display):
+def intromenu(display):
+        display.fill(white)
         (tsurf,trect) = message_display("My First Game", black)
         trect.center = ((displayw/2),(displayh/2))
         display.blit(tsurf,trect)
         pygame.display.update()
         # clock.tick(1)
 
-def displayrestartmenu(display,count):
-        (tsurf,trect) = message_display("You have lost!"+"You scored:"+ str(count), black)
+def restartmenu(display,count):
+        display.fill(white)
+        (tsurf,trect) = message_display("You have lost!/n"+"You scored:"+ str(count), black)
         trect.center = ((displayw/2),(displayh/2))
         display.blit(tsurf,trect)
         pygame.display.update()
+
+def pausemenu(display):
+        display.fill(white)
+        (tsurf,trect) = message_display("Game Paused", black)
+        trect.center = ((displayw/2),(displayh/2))
+        display.blit(tsurf,trect)
+        pygame.display.update()
+
 
 def displaygameboard(display):
         display.fill(black)
@@ -76,6 +86,7 @@ def displaydodged(display,count):
         font = pygame.font.SysFont(None, 25)
         text = font.render("Dodged: "+str(count), True, white)
         display.blit(text,(1,1))
+
 
 def quitgame():
         pygame.mixer.music.stop()
