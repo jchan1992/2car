@@ -1,19 +1,19 @@
 #!/usr/bin/python
 
-# load functions and classes from gamefunc
+# load functions and classes from test2
 from gamefunc import *   
 
 # if __name__ == '__main__':
 #     main()
 
-#game intro screen
+#game intro
 def gameintro(screen,clock):
         # intro = True
         timer = 0
         time1 = pygame.time.get_ticks()
         screen.fill(white)
         displayintro(screen)
-        while timer <= 3000:
+        while timer <= 5000:
                 time2 = pygame.time.get_ticks()
                 timer = time2-time1
                 for event in pygame.event.get():
@@ -32,94 +32,25 @@ def gameintro(screen,clock):
 
 def gameloop(screen,clock):
         end_game = False
-        
-        time = 0
-        time1 = pygame.time.get_ticks()
-                
-        
         #set score counter
         score = 0
-        
-        #set speed threshold to adjust speed
-        speedthresh = 1
-        
-        #set dodge counter
-        dodged = 0
-        
-        #set drop speed
-        speed = 4
 
         #instantiate car objects
-        car11 = car1()
-        car22 = car2()
-        
-        #instantiate coin objects
-        coin11 = coin1()
-        coin22 = coin2()
-        
-        #coin release
-        coin11r = random.randint(0,1)
-        coin22r = random.randint(0,1)
+        car11 = test2.car1()
+        car22 = test2.car2()
 
         while not end_game:
-                #random timer
-                time2 = pygame.time.get_ticks()
-                time = time2-time1
-                if time> 300:
-                    time = 0
-                    time1 = pygame.time.get_ticks()
-                    
-                #speed adjustment
-                if score >= speedthresh:
-                    speed = speed + 1
-                    speedthresh = speedthresh*2    
-                
-                print(time,coin11r,coin22r,speed,speedthresh,score)
 
                 clock.tick(60)
 
                 #draw background
-                displaygameboard(screen)
-                
+                screen.fill(black)
+                pygame.draw.lines(screen,yellow,False,[(displayw/4-2,0),(displayw/4-2,displayh)],4)
+                pygame.draw.lines(screen,yellow,False,[(displayw/2-2,0),(displayw/2-2,displayh)],4)
+                pygame.draw.lines(screen,yellow,False,[(3*displayw/4-2,0),(3*displayw/4-2,displayh)],4)
                 #draw car
                 screen.blit(car11.image,car11.loc)
                 screen.blit(car22.image,car22.loc)
-                
-                #draw coins
-                if coin11r == 1 and coin11.y <= displayh:
-                    screen.blit(coin11.image,coin11.loc)
-                    coin11.update(speed)
-                elif time < 10:
-                    coin11r = random.randint(0,1)
-                    if coin11r ==1:
-                        #coin11.x = random.randint(0,1)
-                        #coin11.y = 0
-                        coin11 = coin1()    
-                    
-                if coin22r == 1 and coin22.y <= displayh:
-                    screen.blit(coin22.image,coin22.loc)
-                    coin22.update(speed)
-                elif time < 10:
-                    coin22r = random.randint(0,1) 
-                    if coin22r == 1:
-                        #coin22.x = random.randint(2,3)
-                        #coin22.y = 0
-                        coin22 = coin2()
-                
-                #update score
-                #detect coins
-                if coin11.x == car11.x and coin11.y > (car11.y-100) and coin11.y < car11.y:
-                    score = score + 1
-                    coin11.y = displayh + 1
-                elif coin11.x is not car11.x and coin11.y > (car11.y-100) and coin11.y < car11.y :
-                    displaymissed(screen)
-                    
-                if coin22.x == car22.x and coin22.y > (car22.y-100) and coin22.y < car22.y:
-                    score = score + 1
-                    coin22.y = displayh + 1
-                elif coin22.x != car22.x and coin22.y > (car22.y-100) and coin22.y < car22.y:
-                    displaymissed(screen)
-                
                 #keyboard inputs
                 for event in pygame.event.get():
                         print(event)
@@ -137,8 +68,8 @@ def gameloop(screen,clock):
                                 if event.key == pygame.K_UP:
                                         displaycrash(screen)
 
-                displaydodged(screen,dodged)
-                displayscore(screen,score)
+                displaydodged(screen,score)
+                # print(clock.get_fps())
                 displayfps(screen,clock)
                 pygame.display.update()
 
@@ -154,13 +85,15 @@ def main():
         pygame.mixer.music.load('initiald.mid')
         pygame.mixer.music.play(-1)
 
-        #rand = random.seed()        
-        gameintro(screen,clock)
-        gameloop(screen,clock)
-        
+        # rand = random.seed()        
+        # gameintro(screen,clock,rand)
+        # gameloop(screen,clock,rand)
+
         pygame.mixer.music.stop()
         pygame.quit()
         sys.exit()
         quit()
 
-main()
+while(1):
+        main()
+
