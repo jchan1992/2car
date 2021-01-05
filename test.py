@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 # load functions and classes from gamefunc
-from gamefunc import *   
+from gamefunc import *  
+from classes import * 
 
 # if __name__ == '__main__':
 #     main()
@@ -13,7 +14,7 @@ def gameintro(screen,clock):
         time1 = pygame.time.get_ticks()
         screen.fill(white)
         displayintro(screen)
-        while timer <= 3000:
+        while timer <= 2000:
                 time2 = pygame.time.get_ticks()
                 timer = time2-time1
                 for event in pygame.event.get():
@@ -32,10 +33,10 @@ def gameintro(screen,clock):
 
 def gameloop(screen,clock):
         end_game = False
+        restart = False
         
         time = 0
         time1 = pygame.time.get_ticks()
-                
         
         #set score counter
         score = 0
@@ -113,13 +114,14 @@ def gameloop(screen,clock):
                     coin11.y = displayh + 1
                 elif coin11.x is not car11.x and coin11.y > (car11.y-100) and coin11.y < car11.y :
                     displaymissed(screen)
+                    end_game = True
                     
                 if coin22.x == car22.x and coin22.y > (car22.y-100) and coin22.y < car22.y:
                     score = score + 1
                     coin22.y = displayh + 1
                 elif coin22.x != car22.x and coin22.y > (car22.y-100) and coin22.y < car22.y:
                     displaymissed(screen)
-                
+                    end_game = True
                 #keyboard inputs
                 for event in pygame.event.get():
                         print(event)
@@ -136,11 +138,24 @@ def gameloop(screen,clock):
                                         screen.blit(car22.image,car22.loc)
                                 if event.key == pygame.K_UP:
                                         displaycrash(screen)
+                                        end_game = True
 
                 displaydodged(screen,dodged)
                 displayscore(screen,score)
                 displayfps(screen,clock)
                 pygame.display.update()
+        if end_game == True:
+            print("end_game = TRUE")
+            while restart == False:
+                displayrestartmenu(screen,score)
+                for event in pygame.event.get():
+                        print(event)
+                        if event.type == pygame.KEYDOWN:
+                                if event.key == pygame.K_q:
+                                        quitgame()
+                                if event.key == pygame.K_r:
+                                        gameloop(screen,clock)
+
 
 #main game loop
 def main():
@@ -150,7 +165,7 @@ def main():
         clock = pygame.time.Clock()
         #set screen size
         screen = pygame.display.set_mode((displayw,displayh))
-        pygame.display.set_caption("My first game")
+        pygame.display.set_caption("2 CARS")
         pygame.mixer.music.load('initiald.mid')
         pygame.mixer.music.play(-1)
 
@@ -158,9 +173,6 @@ def main():
         gameintro(screen,clock)
         gameloop(screen,clock)
         
-        pygame.mixer.music.stop()
-        pygame.quit()
-        sys.exit()
-        quit()
+        quitgame()
 
 main()
