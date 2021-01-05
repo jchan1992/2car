@@ -38,6 +38,10 @@ def gameloop(screen,clock):
         #instantiate car objects
         car11 = car1()
         car22 = car2()
+        
+        #instantiate coin objects
+        coin11 = coin1()
+        coin22 = coin2()
 
         while not end_game:
 
@@ -51,6 +55,10 @@ def gameloop(screen,clock):
                 #draw car
                 screen.blit(car11.image,car11.loc)
                 screen.blit(car22.image,car22.loc)
+                
+                
+                
+                
                 #keyboard inputs
                 for event in pygame.event.get():
                         print(event)
@@ -88,7 +96,7 @@ def mainloop():
         rand = random.seed()        
         gameintro(screen,clock)
         gameloop(screen,clock)
-
+        
         pygame.mixer.music.stop()
         pygame.quit()
         sys.exit()
